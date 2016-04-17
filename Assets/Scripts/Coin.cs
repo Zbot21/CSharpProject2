@@ -3,6 +3,8 @@ using System.Collections;
 
 public class Coin : MonoBehaviour {
 
+	public static int pointsPerCoin = 5;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -13,8 +15,13 @@ public class Coin : MonoBehaviour {
 	
 	}
 
+	public static void ChangePointsPerCoin(int points){
+		pointsPerCoin = points;
+	}
+
 	void OnTriggerEnter2D(Collider2D other){
 		if(other.gameObject.CompareTag("Player")){
+			((Scoring)GameObject.Find ("SpawnManager").GetComponent (typeof(Scoring))).score += pointsPerCoin;
 			Destroy (gameObject);
 		}
 	}
